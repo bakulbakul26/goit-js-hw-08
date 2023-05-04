@@ -1,14 +1,15 @@
-import { galleryItems } from "./gallery-items.js";
+import { galleryItems } from './gallery-items.js';
+import SimpleLightbox from 'simplelightbox';
 // Change code below this line
 
 console.log(galleryItems);
 
-const ulGallery = document.querySelector(".gallery");
+const ulGallery = document.querySelector('.gallery');
 
 function createGalleryMarkup(items) {
   return items
     .map(
-      (item) =>
+      item =>
         `<li class="gallery__item">
         <a class="gallery__link" href="${item.original}">
           <img
@@ -19,17 +20,17 @@ function createGalleryMarkup(items) {
         </a>
       </li>`
     )
-    .join("");
+    .join('');
 }
 const addGalleryMarkup = createGalleryMarkup(galleryItems);
 
 ulGallery.innerHTML = addGalleryMarkup;
-const gallery = new SimpleLightbox(".gallery a", {
-  captionsData: "alt",
-  captionDelay: "250",
+const gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: '250',
 });
 
-ulGallery.addEventListener("click", onImageClick);
+ulGallery.addEventListener('click', onImageClick);
 
 function onImageClick(event) {
   function blockAction(event) {
@@ -37,13 +38,13 @@ function onImageClick(event) {
   }
 
   blockAction(event);
-  if (event.target.nodeName !== "IMG") {
+  if (event.target.nodeName !== 'IMG') {
     return;
   }
   gallery.open(event.target);
 
-  ulGallery.addEventListener("keydown", (event) => {
-    if (event.code === "Escape") {
+  ulGallery.addEventListener('keydown', event => {
+    if (event.code === 'Escape') {
       gallery.close();
     }
   });
